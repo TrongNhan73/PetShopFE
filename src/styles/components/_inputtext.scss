@@ -1,0 +1,22 @@
+$size-image: 50px;
+
+.container {
+    display: flex;
+
+    input {
+        outline: none;
+        border: none;
+
+        &:focus {
+
+            text-decoration: underline;
+        }
+    }
+
+    svg {
+        width: $size-image;
+        height: $size-image;
+
+        stroke: red;
+    }
+}
