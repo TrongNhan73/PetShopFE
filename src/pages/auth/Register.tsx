@@ -1,7 +1,8 @@
 import React from 'react'
 import Loading from '../../components/Loading'
 import InputText from '../../components/InputText'
-import { icon_email } from '../../assets/image'
+import { icon_email } from '../../assets/svg'
+
 export default function Register() {
     return (
         <div className='conainer'>

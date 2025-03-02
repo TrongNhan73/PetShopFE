@@ -1,22 +1,31 @@
-$size-image: 50px;
+@use '../abstracts/mixins';
+$size-image: 40px;
+$color-icon: blue;
 
 .container {
     display: flex;
+    position: relative;
+    border-bottom: 1px solid black;
 
     input {
+        flex: 1;
         outline: none;
         border: none;
+    }
 
-        &:focus {
+    .placeholder {
+        @include mixins.absolute-center-y;
 
-            text-decoration: underline;
-        }
+    }
+
+    &:focus-within .placeholder {
+        transform: translateX(50px)
     }
 
     svg {
         width: $size-image;
         height: $size-image;
 
-        stroke: red;
+        stroke: $color-icon;
     }
 }

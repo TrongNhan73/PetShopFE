@@ -6,7 +6,8 @@ export default function InputText(props: InputText) {
     console.log(typeof (props.c_icon));
     return (
         <div className='container'>
-            <input type="text" placeholder={props.c_placeholder} />
+            <input type="text" />
+            <div className="placeholder">{props.c_placeholder}</div>
             {props.c_icon && <props.c_icon />}
         </div>
     )
