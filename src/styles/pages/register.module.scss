@@ -1,0 +1,53 @@
+@use '../abstracts//mixins';
+@use '../abstracts//variables';
+
+
+$form-size: 400px;
+
+.container {
+    // background: url('../../assets/background/register.png');
+    background-size: 50%;
+    @include mixins.full-screen;
+    @include mixins.flex-center;
+    justify-content: space-around;
+
+    video {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        object-fit: cover;
+    }
+
+
+
+    .register {
+
+        width: $form-size;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(8.1px);
+        -webkit-backdrop-filter: blur(8.1px);
+        border: 1px solid rgba(255, 255, 255, 1);
+
+        .title {
+            text-align: center;
+            font-size: 50px;
+            font-weight: 900;
+            color: variables.$text-color ;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+
+            button {
+                // border-radius: 70% 30% 44% 56% / 33% 49% 51% 67%
+            }
+        }
+    }
+
+}

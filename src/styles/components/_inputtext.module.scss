@@ -1,0 +1,48 @@
+@use '../abstracts/mixins';
+@use '../abstracts/variables';
+
+
+@mixin slide {
+    transform: translateY(-100%);
+    top: 0;
+    font-weight: 700;
+}
+
+$size-image: 30px;
+$color-icon: variables.$text-color;
+
+.container {
+    margin-top: variables.$font-size;
+    display: flex;
+    position: relative;
+    align-items: center;
+    border-bottom: 2px solid variables.$text-color;
+
+    input {
+        background-color: transparent;
+        flex: 1;
+        outline: none;
+        border: none;
+        caret-color: variables.$text-color;
+    }
+
+    .placeholder {
+        position: absolute;
+        transition: all 0.5s;
+        @include mixins.absolute-center-y;
+
+        &:not(.empty) {
+            @include slide;
+        }
+    }
+
+    &:focus-within .placeholder {
+        @include slide;
+    }
+
+    svg {
+        width: $size-image;
+        height: $size-image;
+        stroke: $color-icon;
+    }
+}
