@@ -5,8 +5,6 @@ import { Icon_email, Icon_phone, Icon_user } from '../../assets/svg';
 import InputPassword from '../../components/InputPassword';
 import style from '../../styles/pages/register.module.scss'
 import { logo_title } from '../../assets/image';
-import bgVideo from '../../assets/background/video.mp4';
-import bg from '../../assets/background/register.png';
 
 export default function Register() {
     const [email, setEmail] = useState('');
@@ -17,12 +15,7 @@ export default function Register() {
     const [isShow, setIsShow] = useState(false);
     return (
         <div className={style.container}>
-            <video
-                src={bgVideo}
-                // poster={bg}
-                muted
-                autoPlay
-                loop />
+            <img src={logo_title} alt="logo" />
             <div className={style.register}>
                 <div className={style.title}>Register</div>
                 <form action="">
@@ -51,6 +44,11 @@ export default function Register() {
                         state={passwordComfirm}
                         setState={setPasswordComfirm}
                         isShow={isShow} />
+                    <div className={style.checkbox}>
+                        <input type="checkbox" id="showpassword" defaultChecked={isShow} onChange={() => setIsShow(!isShow)} />
+                        <label htmlFor="showpassword">{isShow ? "Hide password" : "Show password"}</label>
+                    </div>
+                    <div className={style.text}>Aldready have account? <span>Login now!</span></div>
                     <button>Register</button>
                 </form>
             </div>

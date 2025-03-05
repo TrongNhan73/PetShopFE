@@ -1,9 +1,15 @@
-import logo from '../assets/brand/logo.png'
-import logo_title from '../assets/brand/logo&title.png'
-import title from '../assets/brand/title.png'
-import background_register from '../assets/background/register.png'
+import logo from '../assets/images/logo.png'
+import logo_title from '../assets/images/logo&title.png'
+import title from '../assets/images/title.png'
+import background from '../assets/images/background.png'
 
 
 
 
-export { logo, logo_title, title, background_register }
+
+export {
+    logo,
+    logo_title,
+    title,
+    background,
+}

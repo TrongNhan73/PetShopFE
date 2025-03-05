@@ -1,0 +1,15 @@
+@use '../abstracts//mixins';
+@use '../abstracts//variables';
+
+.container {
+    @include mixins.full-screen;
+    @include mixins.flex-center;
+
+    video {
+        position: fixed;
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        object-fit: cover;
+    }
+}
