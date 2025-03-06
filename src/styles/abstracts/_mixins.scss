@@ -1,3 +1,7 @@
+@use './variables';
+
+
+
 @mixin flex-center {
     display: flex;
     justify-content: center;
@@ -20,6 +24,79 @@ $mobile-width: 480px;
 $tablet-width: 768px;
 $desktop-width: 1024px;
 
+@mixin style-button {
+    font-size: 1.5rem;
+    color: #fafafa;
+    text-transform: uppercase;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    background: variables.$text-color;
+    box-shadow: 3px 3px #645d52;
+    cursor: pointer;
+    margin: 35px 0;
+    animation: puple 3s infinite both;
+
+    @keyframes puple {
+        0% {
+            transform: scale(1);
+
+        }
+
+        50% {
+            transform: scale(1.01) rotate(1deg);
+
+        }
+
+        to {
+            transform: scale(1);
+        }
+    }
+
+    &:hover {
+        animation: none;
+        text-shadow: #FC0 1px 0 10px;
+    }
+}
+
+
+
+
+
+
+
+//animation
+@keyframes close {
+    from {
+        // opacity: 1;
+        transform: rotateY(0deg);
+    }
+
+    to {
+        // opacity: 0;
+        transform: rotateY(90deg);
+    }
+}
+
+@keyframes open {
+    from {
+        // opacity: 0;
+        transform: rotateY(270deg);
+    }
+
+    to {
+        // opacity: 1;
+        transform: rotateY(360deg);
+    }
+}
+
+$close: close;
+$open: open;
+
+
+
+
+//reponsive
 @mixin mobile {
     @media (max-width: #{$mobile-width - 1px}) {
         @content;

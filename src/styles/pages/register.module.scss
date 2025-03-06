@@ -16,13 +16,19 @@ $logo-size: 200px;
     img {
         width: $logo-size;
         position: absolute;
-        left: 0;
+        left: 10%;
         top: 0;
+        background-color: rgba(255, 255, 255, 0.186);
+        border-radius: 20px;
     }
 
 
 
     .register {
+
+        animation: mixins.$open 1s both;
+
+
 
 
         width: $form-size;
@@ -50,16 +56,7 @@ $logo-size: 200px;
             gap: 10px;
 
             button {
-                font-size: 1.5rem;
-                color: #fafafa;
-                text-transform: uppercase;
-                padding: 10px 20px;
-                border-radius: 10px;
-                border: none;
-                background: variables.$text-color;
-                box-shadow: 3px 3px #645d52;
-                cursor: pointer;
-                margin: 35px 0;
+                @include mixins.style-button
             }
 
             button:active {
@@ -97,6 +94,11 @@ $logo-size: 200px;
         }
 
 
+
+        &.end {
+            animation: mixins.$close 1s both;
+
+        }
     }
 
     @include mixins.mobile {

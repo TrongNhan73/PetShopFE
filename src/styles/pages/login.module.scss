@@ -1,0 +1,131 @@
+@use '../abstracts//mixins';
+@use '../abstracts//variables';
+
+
+$form-size: 400px;
+$logo-size: 200px;
+
+
+
+
+
+
+
+
+
+.container {
+
+    @include mixins.full-screen;
+    @include mixins.flex-center;
+    justify-content: space-around;
+
+
+
+    img {
+        width: $logo-size;
+        position: absolute;
+        left: 10%;
+        top: 0;
+        background-color: rgba(255, 255, 255, 0.186);
+        border-radius: 20px;
+    }
+
+
+
+    .login {
+
+        animation: mixins.$open 1s both;
+
+
+        width: $form-size;
+        padding: 10px;
+        background: rgba(255, 255, 255, 0.1);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(8.1px);
+        -webkit-backdrop-filter: blur(8.1px);
+        border: 1px solid rgba(255, 255, 255, 1);
+
+        .title {
+            text-align: center;
+            font-size: 50px;
+            font-weight: 900;
+            color: variables.$text-color ;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 5px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            padding: 20px;
+
+            button {
+                @include mixins.style-button;
+
+
+            }
+
+            .checkbox {
+                accent-color: variables.$text-color;
+                display: flex;
+                align-items: center;
+                gap: 5px;
+
+                input {
+                    border-radius: 10px;
+                }
+            }
+
+            .text {
+                span {
+                    font-weight: 700;
+                    cursor: pointer;
+
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
+
+        @include mixins.desktop {
+            position: absolute;
+            right: 100px;
+
+        }
+
+
+        &.end {
+            animation: mixins.$close 1s both;
+
+        }
+
+    }
+
+    @include mixins.mobile {
+        img {
+            display: none;
+        }
+
+        .login {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            backdrop-filter: blur(4.1px);
+            -webkit-backdrop-filter: blur(4.1px);
+            background: rgba(255, 255, 255, 0.01);
+
+        }
+    }
+
+    @include mixins.tablet {
+        img {
+            display: none;
+        }
+    }
+
+}

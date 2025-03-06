@@ -1,18 +1,21 @@
 @use '../abstracts/mixins';
 @use '../abstracts/variables';
 
+$focus-font: 24px;
+
 
 @mixin slide {
     transform: translateY(-100%);
     top: 0;
     font-weight: 700;
+    font-size: $focus-font;
 }
 
 $size-image: 30px;
 $color-icon: variables.$text-color;
 
 .container {
-    margin-top: variables.$font-size;
+    margin-top: #{$focus-font+10px};
     display: flex;
     position: relative;
     align-items: center;
