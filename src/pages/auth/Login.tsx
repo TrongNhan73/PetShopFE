@@ -5,7 +5,7 @@ import InputText from '../../components/InputText';
 import { Icon_email, Icon_user } from '../../assets/svg';
 import InputPassword from '../../components/InputPassword';
 import { useLocation, useNavigate } from 'react-router';
-
+import { useGoogleLogin } from '@react-oauth/google';
 
 
 export default function Login() {
@@ -24,6 +24,9 @@ export default function Login() {
 
     }
 
+    const handlLogin = useGoogleLogin({
+        onSuccess: tokenResponse => console.log(tokenResponse),
+    });
 
 
 
@@ -50,7 +53,8 @@ export default function Login() {
                         <label htmlFor="showpassword">{isShow ? "Hide password" : "Show password"}</label>
                     </div>
                     <div className={style.text}>Don't have account? <span onClick={handleGoToRegister}>Register now!</span></div>
-                    <button>Login</button>
+                    <button type='button'>Login</button>
+                    <button type='button' onClick={() => handlLogin()}>Login with Google</button>
                 </form>
             </div>
         </div>

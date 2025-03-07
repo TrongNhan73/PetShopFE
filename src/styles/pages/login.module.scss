@@ -65,6 +65,12 @@ $logo-size: 200px;
             button {
                 @include mixins.style-button;
 
+                &+button {
+                    background-color: rgb(248, 239, 239);
+                    color: variables.$text-color;
+                    font-weight: 600;
+                    margin: 0;
+                }
 
             }
 
