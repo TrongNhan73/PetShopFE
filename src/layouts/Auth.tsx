@@ -7,12 +7,12 @@ import { auth_background } from '../assets/image'
 export default function Auth() {
     return (
         <div className={style.container}>
-            <video
+            {/* <video
                 src={background_auth}
                 poster={auth_background}
                 muted
                 autoPlay
-                loop />
+                loop /> */}
             <Outlet />
         </div>
     )

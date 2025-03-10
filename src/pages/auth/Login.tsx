@@ -4,8 +4,9 @@ import { logo_title } from '../../assets/image';
 import InputText from '../../components/InputText';
 import { Icon_email, Icon_user } from '../../assets/svg';
 import InputPassword from '../../components/InputPassword';
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { useGoogleLogin } from '@react-oauth/google';
+import { sendApiLogin } from '../../api/authApi';
 
 
 export default function Login() {
@@ -28,7 +29,11 @@ export default function Login() {
         onSuccess: tokenResponse => console.log(tokenResponse),
     });
 
-
+    const handleLogin = async () => {
+        let data = await sendApiLogin({ email, password });
+        console.log('>>>>>');
+        console.log(data);
+    }
 
     return (
         <div className={style.container}>
@@ -53,7 +58,7 @@ export default function Login() {
                         <label htmlFor="showpassword">{isShow ? "Hide password" : "Show password"}</label>
                     </div>
                     <div className={style.text}>Don't have account? <span onClick={handleGoToRegister}>Register now!</span></div>
-                    <button type='button'>Login</button>
+                    <button type='button' onClick={handleLogin}>Login</button>
                     <button type='button' onClick={() => handlLogin()}>Login with Google</button>
                 </form>
             </div>
