@@ -11,7 +11,7 @@ export default function InputPassword(props: InputPassword) {
             <div onClick={() => title.current?.focus()} className={props.state.content ? style.placeholder : `${style.placeholder} ${style.empty}`}>{props.c_placeholder}</div>
             <Icon_lock />
             <div className={`${style.err_message} ${props.state.err === 2 ? style.show : ''}`}>{props.message_err}</div>
-            <div className={`${style.err_message} ${props.state.err === 3 ? style.show : ''}`}>Confirm Password is not match with Password</div>
+            <div className={`${style.err_message} ${props.state.err === 3 ? style.show : ''}`}>Confirm Password is wrong</div>
             <div className={`${style.err_message} ${props.state.err === 1 ? style.show : ''}`}>{props.c_placeholder + ' is required'}</div>
         </div>
     )

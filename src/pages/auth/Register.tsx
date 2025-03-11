@@ -62,7 +62,26 @@ export default function Register() {
 
     }
 
+
+    const resetStateErr = () => {
+        setEmail({ ...email, err: 0 });
+        setUsername({ ...username, err: 0 });
+        setPhone({ ...phone, err: 0 });
+        setPassword({ ...password, err: 0 });
+        setPasswordConfirm({ ...passwordConfirm, err: 0 });
+    }
+
+    const resetState = () => {
+        setEmail({ content: '', err: 0 });
+        setUsername({ content: '', err: 0 });
+        setPhone({ content: '', err: 0 });
+        setPassword({ content: '', err: 0 });
+        setPasswordConfirm({ content: '', err: 0 });
+    }
+
     const handleRegister = async () => {
+        resetStateErr();
+
         //check empty
         if (controlFunct(email.content.length === 0, () => setEmail({ ...email, err: 1 }))) return;
         if (controlFunct(username.content.length === 0, () => setUsername({ ...username, err: 1 }))) return;
@@ -93,7 +112,7 @@ export default function Register() {
             <img src={logo_title} alt="logo" />
             <div className={`${style.register} ${isEnd ? style.end : ''}`}>
                 <div className={style.title}>Register</div>
-                <form action="">
+                <form >
                     <InputText
                         c_placeholder='Email'
                         c_icon={Icon_email}
