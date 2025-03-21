@@ -1,5 +1,9 @@
 @use './abstracts/variables';
 
+:root {
+    --toastify-font-family: "Patrick Hand", cursive;
+}
+
 * {
     font-family: "Patrick Hand", cursive;
     font-weight: 400;

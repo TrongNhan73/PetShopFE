@@ -11,6 +11,7 @@ export default function InputText(props: InputText) {
             <div className={props.state.content ? style.placeholder : `${style.placeholder} ${style.empty}`} onClick={() => title.current?.focus()}>{props.c_placeholder}</div>
             {props.c_icon && <props.c_icon />}
             <div className={`${style.err_message} ${props.state.err === 2 ? style.show : ''}`}>{props.message_err}</div>
+            <div className={`${style.err_message} ${props.state.err === 3 ? style.show : ''}`}>{props.c_placeholder + ' already exists'}</div>
             <div className={`${style.err_message} ${props.state.err === 1 ? style.show : ''}`}>{props.c_placeholder + ' is required'}</div>
         </div>
     )

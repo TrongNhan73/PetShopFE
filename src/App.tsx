@@ -1,11 +1,6 @@
-import { Route, Routes } from "react-router"
-import Login from "./pages/auth/Login"
-import Register from "./pages/auth/Register"
-import Home from "./pages/client/Home"
-import NotFound from "./pages/NotFound"
-import path from "./const/path"
-import Auth from "./layouts/Auth"
 
+import MainRoute from "./routes/MainRoute"
+import { Bounce, Slide, ToastContainer } from "react-toastify"
 
 
 function App() {
@@ -13,14 +8,20 @@ function App() {
 
   return (
     <>
-      <Routes>
-        <Route index element={<Home />} />
-        <Route element={<Auth />}>
-          <Route path={path.login} element={<Login />} />
-          <Route path={path.register} element={<Register />} />
-        </Route>
-        <Route path={path.others} element={<NotFound />} />
-      </Routes>
+      <MainRoute />
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick={false}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Slide}
+      />
     </>
   )
 }

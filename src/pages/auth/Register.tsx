@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState, FC } from 'react'
 import Loading from '../../components/Loading'
 import InputText from '../../components/InputText'
 import { Icon_email, Icon_phone, Icon_user } from '../../assets/svg';
 import InputPassword from '../../components/InputPassword';
 import style from '../../styles/pages/register.module.scss'
 import { logo_title } from '../../assets/image';
-import { useLocation, useNavigate } from 'react-router';
+import { useNavigate } from 'react-router';
 import { sendApiRegister } from '../../api/authApi';
 import { validateEmail, validatePassword, validatePhone } from '../../utils/validate';
+import LoadingSmall from '../../components/LoadingSmall';
+import { toast } from 'react-toastify';
+import path from '../../const/path';
 
 
 
@@ -48,7 +51,7 @@ export default function Register() {
     });
     const [isShow, setIsShow] = useState(false);
     const [isEnd, setIsEnd] = useState(false);
-
+    const [isloading, setIsloading] = useState(false);
 
     let navigate = useNavigate();
 
@@ -97,14 +100,39 @@ export default function Register() {
         if (controlFunct(passwordConfirm.content !== password.content, () => setPasswordConfirm({ ...passwordConfirm, err: 3 }))) return;
 
         //send api
-        let data = await sendApiRegister({
-            email: email.content,
-            username: username.content,
-            phone: phone.content,
-            password: password.content
-        });
-        console.log('>>>>>>>>register');
-        console.log(data);
+        try {
+            setIsloading(true);
+            let data = await sendApiRegister({
+                email: email.content.trim(),
+                username: username.content.trim(),
+                phone: phone.content.trim(),
+                password: password.content.trim()
+            });
+            setIsloading(false);
+            if (+data.code === -1) {
+                toast.error('The email is already exist!');
+                setEmail({ ...email, err: 3 })
+                return;
+            }
+            else if (+data.code === 1) {
+                toast.success('Registration successful');
+                navigate(path.login);
+                return;
+
+            } else if (+data.code === -2) {
+                toast.error('The phone number is already exist!');
+                setPhone({ ...phone, err: 3 })
+                return;
+            }
+            toast.error('There are some issues from the server')
+            console.log('>>>>>>>>register');
+            console.log(data);
+        }
+        catch (e) {
+            toast.error('Can\'t connect to server')
+            setIsloading(false);
+            console.log(e);
+        }
     }
 
     return (
@@ -148,7 +176,7 @@ export default function Register() {
                         <label htmlFor="showpassword">{isShow ? "Hide password" : "Show password"}</label>
                     </div>
                     <div className={style.text}>Aldready have account? <span onClick={handleGoToLogin}>Login now!</span></div>
-                    <button type='button' onClick={handleRegister}>Register</button>
+                    <button type='button' onClick={handleRegister} >{isloading ? <LoadingSmall /> : 'Register'}</button>
                 </form>
             </div>
         </div>
