@@ -1,4 +1,5 @@
 const path = {
+    index: '/',
     login: '/login',
     register: '/register',
     product: '/products',

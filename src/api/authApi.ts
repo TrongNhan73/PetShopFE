@@ -1,12 +1,12 @@
 import customAxios from "../config/axios";
-import type { LoginRequest, RegisterRequest, RegisterResponse } from "../types";
+import type { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from "../types";
 
 
 
 
 const sendApiLogin = async (payload: LoginRequest) => {
-    let data = await customAxios.post('/login', payload);
-    return data;
+    let res = await customAxios.post<LoginResponse>('/login', payload);
+    return res.data;
 }
 
 const sendApiRegister = async (payload: RegisterRequest): Promise<RegisterResponse> => {

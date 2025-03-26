@@ -1,4 +1,4 @@
-import { Response } from "./TempalteResponse.type";
+import type { Response } from "./TempalteResponse.type";
 export interface RegisterRequest {
     email: string,
     username: string,
