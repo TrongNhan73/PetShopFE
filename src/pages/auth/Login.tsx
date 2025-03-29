@@ -15,6 +15,8 @@ import decodeAcessToken from '../../services/jwt';
 import { useAppDispatch, useAppSelector } from '../../hooks/reduxHook';
 import { setUser } from '../../store/userSlice';
 import { jwtDecode } from 'jwt-decode';
+import *as localService from '../../services/localStorage';
+import keyname from '../../const/key';
 
 
 
@@ -96,6 +98,7 @@ export default function Login() {
                     const jwtinfo = decodeAcessToken(accesstoken);
                     console.log('>>>>>>>>>>><>');
                     console.log(jwtinfo);
+                    localService.saveData(keyname.isAuthenticated, 'true');
                     AppDispath(
                         setUser({
                             email: jwtinfo.email,

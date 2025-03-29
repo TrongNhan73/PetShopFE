@@ -4,6 +4,7 @@ import cartReducer from './cartSlice'
 import { Cart, User } from '../types'
 import * as localservice from '../services/localStorage'
 import * as sessionservice from '../services/sessionStorage'
+import keyname from '../const/key'
 
 const preloadState = () => {
     const data = {
@@ -21,12 +22,16 @@ const preloadState = () => {
             role_id: null
         }
     }
-    const datauser = sessionservice.getData('user');
-    const datacart = localservice.getData('cart');
-    if (datauser) {
+
+    const datauser = sessionservice.getData(keyname.userdata);
+
+    const datacart = localservice.getData(keyname.cartdata);
+    if (datauser.access_token) {
+
         data.user = datauser;
+
     }
-    if (datacart) {
+    if (datacart.number) {
         data.cart = datacart;
     }
     return data;
@@ -45,11 +50,11 @@ store.subscribe(() => {
     let state = store.getState();
     if (state.cart) {
         let data = JSON.stringify(state.cart);
-        localservice.saveData('cart', data);
+        localservice.saveData(keyname.cartdata, data);
     }
     if (state.user) {
         let data = JSON.stringify(state.user);
-        sessionservice.saveData('user', data);
+        sessionservice.saveData(keyname.userdata, data);
     }
 })
 

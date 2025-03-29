@@ -1,5 +1,5 @@
 import customAxios from "../config/axios";
-import type { LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from "../types";
+import type { GetAccessTokenResponse, LoginRequest, LoginResponse, RegisterRequest, RegisterResponse } from "../types";
 
 
 
@@ -14,4 +14,10 @@ const sendApiRegister = async (payload: RegisterRequest): Promise<RegisterRespon
     return res.data;
 }
 
-export { sendApiLogin, sendApiRegister }
+
+const sendApiGetAccesstoken = async (): Promise<GetAccessTokenResponse> => {
+    let res = await customAxios.get<GetAccessTokenResponse>('getnewaccesstoken');
+    return res.data;
+}
+
+export { sendApiLogin, sendApiRegister, sendApiGetAccesstoken }

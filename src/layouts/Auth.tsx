@@ -10,6 +10,7 @@ export default function Auth() {
     const AppSelector = useAppSelector(state => state);
     const navigate = useNavigate();
     useEffect(() => {
+        console.log('runrun');
         if (AppSelector.user.access_token) {
             navigate(path.index);
         }

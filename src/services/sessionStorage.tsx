@@ -21,4 +21,14 @@ const getData = (key: string) => {
     }
 }
 
-export { getData, saveData }
+
+const deleteData = (key: string) => {
+    try {
+        sessionStorage.removeItem(key);
+    } catch (e) {
+        console.log('>>>err when delete data from sessionstorage:');
+        console.log(e);
+    }
+}
+
+export { getData, saveData, deleteData }
