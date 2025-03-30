@@ -14,6 +14,8 @@ import { sendApiGetAccesstoken } from '../api/authApi'
 import { toast } from 'react-toastify'
 import decodeAcessToken from '../services/jwt'
 import { setUser } from '../store/userSlice'
+import Dashboard from '../layouts/Dashboard'
+import Overview from '../pages/admin/Overview'
 
 
 export default function MainRoute() {
@@ -55,6 +57,9 @@ export default function MainRoute() {
       <Route element={<Auth />}>
         <Route path={path.login} element={<Login />} />
         <Route path={path.register} element={<Register />} />
+      </Route>
+      <Route element={<Dashboard />}>
+        <Route path={path.admin_overview} element={<Overview />} />
       </Route>
       <Route path={path.others} element={<NotFound />} />
     </Routes>

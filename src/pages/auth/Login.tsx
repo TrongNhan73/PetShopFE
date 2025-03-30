@@ -110,8 +110,8 @@ export default function Login() {
                         })
                     );
 
+
                 }
-                navigate(path.index);
                 return;
             }
 

@@ -10,9 +10,14 @@ export default function Auth() {
     const AppSelector = useAppSelector(state => state);
     const navigate = useNavigate();
     useEffect(() => {
-        console.log('runrun');
         if (AppSelector.user.access_token) {
-            navigate(path.index);
+            if (AppSelector.user.role_id === import.meta.env.VITE_ID_ADMIN_ROLE) {
+                navigate(path.admin_overview);
+
+            }
+            else {
+                navigate(path.index);
+            }
         }
     }, [AppSelector.user]);
     return (

@@ -21,11 +21,14 @@ export const userSlice = createSlice({
     setUser: (state, action: PayloadAction<User>) => {
       Object.assign(state, action.payload)
 
+    },
+    logOut: state => {
+      return initialState;
     }
   },
 })
 
-export const { setUser } = userSlice.actions
+export const { setUser, logOut } = userSlice.actions
 
 
 export default userSlice.reducer
