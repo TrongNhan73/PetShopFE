@@ -7,11 +7,11 @@ import { useAppSelector } from '../hooks/reduxHook'
 import path from '../const/path'
 
 export default function Auth() {
-    const AppSelector = useAppSelector(state => state);
+    const AppSelector = useAppSelector(state => state.user);
     const navigate = useNavigate();
     useEffect(() => {
-        if (AppSelector.user.access_token) {
-            if (AppSelector.user.role_id === import.meta.env.VITE_ID_ADMIN_ROLE) {
+        if (AppSelector.access_token) {
+            if (AppSelector.role_id === import.meta.env.VITE_ID_ADMIN_ROLE) {
                 navigate(path.admin_overview);
 
             }
@@ -19,7 +19,7 @@ export default function Auth() {
                 navigate(path.index);
             }
         }
-    }, [AppSelector.user]);
+    }, [AppSelector]);
     return (
         <div className={style.container}>
 

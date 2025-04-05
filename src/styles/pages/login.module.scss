@@ -95,6 +95,10 @@ $logo-size: 200px;
                     }
                 }
             }
+
+            a {
+                color: variables.$text-color;
+            }
         }
 
         @include mixins.desktop {

@@ -35,7 +35,8 @@ $desktop-width: 1025px;
     box-shadow: 3px 3px #645d52;
     cursor: pointer;
     margin: 35px 0;
-    animation: puple 3s infinite both;
+    // animation: puple 3s infinite both;
+    // animation-delay: 5s;
 
     @keyframes puple {
         0% {

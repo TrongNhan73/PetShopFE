@@ -4,9 +4,9 @@ import { logo_title } from '../../assets/image';
 import InputText from '../../components/InputText';
 import { Icon_email, Icon_user } from '../../assets/svg';
 import InputPassword from '../../components/InputPassword';
-import { useNavigate } from 'react-router';
-import { useGoogleLogin } from '@react-oauth/google';
-import { sendApiLogin } from '../../api/authApi';
+import { Link, NavLink, useNavigate } from 'react-router';
+import { useGoogleLogin, GoogleLogin } from '@react-oauth/google';
+import { sendApiLogin, sendApiLogInWithGoogle } from '../../api/authApi';
 import { validateEmail, validatePassword } from '../../utils/validate';
 import { toast } from 'react-toastify';
 import LoadingSmall from '../../components/LoadingSmall';
@@ -29,7 +29,7 @@ const controlFunct = (condition: boolean, callback: () => void) => {
 
 export default function Login() {
     const AppDispath = useAppDispatch();
-    const AppSelector = useAppSelector((state => state));
+
     const [email, setEmail] = useState({
         content: '',
         err: 0
@@ -60,8 +60,55 @@ export default function Login() {
 
     }
 
+    const handleLoginWithGGAccessToken = async (response: string) => {
+        try {
+
+
+            const data = await sendApiLogInWithGoogle(response);
+
+            if (+data.code === 0) {
+                toast.error("There are some issue from the server");
+                return;
+            }
+            if (+data.code === 1) {
+                toast.success("Login successfully");
+                const accesstoken = data.data?.accessToken;
+                if (accesstoken) {
+                    const jwtinfo = decodeAcessToken(accesstoken);
+                    console.log('>>>>>>>>>>><>');
+                    console.log(jwtinfo);
+                    localService.saveData(keyname.isAuthenticated, 'true');
+                    AppDispath(
+                        setUser({
+                            email: jwtinfo.email,
+                            phone: jwtinfo.phone,
+                            address: jwtinfo.address,
+                            access_token: accesstoken,
+                            user_name: jwtinfo.user_name,
+                            role_id: jwtinfo.role_id,
+                        })
+                    );
+
+
+                }
+                return;
+            }
+
+
+
+        } catch (err) {
+            console.log(err);
+            toast.error('Login failed!')
+        }
+    }
     const handlGoogleLogin = useGoogleLogin({
-        onSuccess: tokenResponse => console.log(tokenResponse),
+        onSuccess: response => {
+            console.log("Google login success:", response);
+            if (response.access_token) {
+                handleLoginWithGGAccessToken(response.access_token);
+            }
+        },
+        onError: error => console.error("Login Failed:", error),
     });
 
     const handleLogin = async () => {
@@ -147,6 +194,8 @@ export default function Login() {
                         <label htmlFor="showpassword">{isShow ? "Hide password" : "Show password"}</label>
                     </div>
                     <div className={style.text}>Don't have account? <span onClick={handleGoToRegister}>Register now!</span></div>
+                    <Link to={path.index}>Continue as Guest</Link>
+
                     <button type='button' onClick={handleLogin}>{isloading ? <LoadingSmall /> : 'Login'}</button>
                     <button type='button' onClick={() => handlGoogleLogin()} disabled={isloading}>Login with Google</button>
                 </form>

@@ -26,4 +26,9 @@ const sendApiLogOut = async (): Promise<LogOutResponse> => {
     return res.data;
 }
 
-export { sendApiLogin, sendApiRegister, sendApiGetAccesstoken, sendApiLogOut }
+const sendApiLogInWithGoogle = async (googleAccessToken: string) => {
+    let res = await customAxios.post('googlelogin', { googleAccessToken });
+    return res.data;
+}
+
+export { sendApiLogin, sendApiRegister, sendApiGetAccesstoken, sendApiLogOut, sendApiLogInWithGoogle }
