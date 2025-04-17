@@ -13,11 +13,11 @@ const getData = (key: string) => {
         if (jsondata) {
             return JSON.parse(jsondata);
         }
-        return {}
+        return null;
     } catch (e) {
         console.log('>>>err when get data from sessionStorage:');
         console.log(e);
-        return {}
+        return null;
     }
 }
 

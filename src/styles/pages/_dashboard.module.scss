@@ -1,0 +1,167 @@
+@use '../abstracts//variables';
+
+
+$icon-fill-color: blue;
+$icon-stroke-color: rgb(0, 0, 0);
+$icon-size: 50px;
+$color-header: white;
+$color-logout: red;
+
+.container {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+
+    .left-navigation {
+        width: 250px;
+        background-color: aquamarine;
+        padding: 10px;
+
+        div.title {
+
+
+            img {
+                width: 100%;
+            }
+        }
+
+        ul.navigation__items {
+            font-size: 30px;
+
+            li {
+                list-style: none;
+                font-size: inherit;
+                display: flex;
+                align-items: center;
+
+                &:hover {
+                    background-color: rgb(226, 26, 192);
+                }
+
+                a {
+                    font-size: inherit;
+                    width: 100%;
+                    color: red;
+                    text-decoration: none;
+                }
+
+                svg {
+                    width: $icon-size;
+                    height: $icon-size;
+                    stroke: $icon-stroke-color;
+                    fill: $icon-fill-color;
+                    stroke-width: 1 !important;
+                }
+
+
+                &:has(> :global(.active)) {
+                    background-color: rgb(3, 13, 13);
+                }
+
+
+            }
+
+
+
+            li.collapse__container {
+                font-size: inherit;
+                color: blue;
+
+                &:hover {
+                    background-color: transparent;
+                }
+
+                flex-direction: column;
+                align-items: flex-start;
+
+                .title {
+                    display: flex;
+                    align-items: center;
+                    font-size: inherit;
+                    color: inherit;
+                }
+
+                ul.collapse__items {
+                    font-size: inherit;
+                    width: 100%;
+
+
+
+                    li {
+                        margin-left: 50px;
+                        height: 40px;
+                        transition: height 1s;
+
+                        a {
+                            color: rgb(13, 255, 0);
+                        }
+                    }
+
+                    &.collapse {
+                        li {
+                            height: 0;
+                            overflow: hidden;
+                        }
+                    }
+
+
+                }
+            }
+        }
+    }
+
+    .content {
+        flex: 1;
+        overflow: hidden;
+
+        background-color: bisque;
+
+        .header {
+            background-color: $color-header;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            font-size: 30px;
+
+            h1 {
+                font-size: inherit;
+                font-weight: 700;
+            }
+
+            .log-out-group {
+                font-size: inherit;
+                display: flex;
+                gap: 10px;
+                cursor: pointer;
+                align-items: center;
+                z-index: 1;
+
+                svg {
+                    width: #{$icon-size - 10px};
+                    height: #{$icon-size - 10px};
+                    fill: $color-logout;
+                    background-color: $color-header;
+                    padding-left: 60px;
+                    transform: translateX(calc(100% - 10px));
+                    transition: all 1s;
+                }
+
+                div.label {
+                    font-size: inherit;
+                    color: $color-logout;
+                    border: none;
+                    background: transparent;
+
+
+                }
+
+                &:hover {
+                    svg {
+                        transform: translateX(0);
+
+                    }
+                }
+            }
+        }
+    }
+}

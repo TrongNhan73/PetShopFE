@@ -16,6 +16,13 @@ import decodeAcessToken from '../services/jwt'
 import { setUser } from '../store/userSlice'
 import Dashboard from '../layouts/Dashboard'
 import Overview from '../pages/admin/Overview'
+import AdminProduct from '../pages/admin/AdminProduct'
+import AdminOrderNew from '../pages/admin/AdminOrderNew'
+import AdminOrderPending from '../pages/admin/AdminOrderPending'
+import AdminOrderCompleted from '../pages/admin/AdminOrderCompleted'
+import AdminChat from '../pages/admin/AdminChat'
+import AdminUser from '../pages/admin/AdminUser'
+import AdminCoupon from '../pages/admin/AdminCoupon'
 
 
 export default function MainRoute() {
@@ -24,25 +31,33 @@ export default function MainRoute() {
   const isAuthenticated = localService.getData(keyname.isAuthenticated);
   const checkAuth = async () => {
     if (isAuthenticated) {
+      console.log(isAuthenticated);
       if (!accesstoken) {
-        let res = await sendApiGetAccesstoken();
-        if (+res.code === 1) {
-          console.log('Update access token');
-          if (res.data?.accessToken) {
-            const jwtinfo = decodeAcessToken(res.data?.accessToken);
-            AppDispath(
-              setUser({
-                email: jwtinfo.email,
-                phone: jwtinfo.phone,
-                address: jwtinfo.address,
-                access_token: res.data.accessToken,
-                user_name: jwtinfo.user_name,
-                role_id: jwtinfo.role_id,
-              })
-            );
+        try {
+          let res = await sendApiGetAccesstoken();
+          if (+res.code === 1) {
+            console.log('Update access token');
+            if (res.data?.accessToken) {
+              const jwtinfo = decodeAcessToken(res.data?.accessToken);
+              AppDispath(
+                setUser({
+                  email: jwtinfo.email,
+                  phone: jwtinfo.phone,
+                  address: jwtinfo.address,
+                  access_token: res.data.accessToken,
+                  user_name: jwtinfo.user_name,
+                  role_id: jwtinfo.role_id,
+                  img_url: jwtinfo.img_url
+                })
+              );
+            }
+          } else {
+            toast.warning('Your login session has expired, please log in again');
+            localService.deleteData(keyname.isAuthenticated)
           }
-        } else if (+res.code !== -1) {
-          toast.warning('Your login session has expired, please log in again')
+        } catch (err) {
+          console.log(err);
+          toast.error('Some error when get access token')
         }
 
       }
@@ -60,6 +75,13 @@ export default function MainRoute() {
       </Route>
       <Route element={<Dashboard />}>
         <Route path={path.admin_overview} element={<Overview />} />
+        <Route path={path.admin_product} element={<AdminProduct />} />
+        <Route path={path.admin_order_new} element={<AdminOrderNew />} />
+        <Route path={path.admin_order_pending} element={<AdminOrderPending />} />
+        <Route path={path.admin_order_completed} element={<AdminOrderCompleted />} />
+        <Route path={path.admin_chat} element={<AdminChat />} />
+        <Route path={path.admin_user} element={<AdminUser />} />
+        <Route path={path.admin_coupon} element={<AdminCoupon />} />
       </Route>
       <Route path={path.others} element={<NotFound />} />
     </Routes>

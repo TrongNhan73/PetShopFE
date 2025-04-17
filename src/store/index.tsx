@@ -19,19 +19,20 @@ const preloadState = () => {
             address: null,
             access_token: null,
             user_name: null,
-            role_id: null
+            role_id: null,
+            img_url: null
         }
     }
 
     const datauser = sessionservice.getData(keyname.userdata);
 
     const datacart = localservice.getData(keyname.cartdata);
-    if (datauser.access_token) {
+    if (datauser) {
 
         data.user = datauser;
 
     }
-    if (datacart.number) {
+    if (datacart) {
         data.cart = datacart;
     }
     return data;

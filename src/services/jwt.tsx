@@ -6,6 +6,7 @@ interface userinfo {
     role_id: string,
     address: string,
     phone: string,
+    img_url: string,
     iat: number,
     exp: number
 }

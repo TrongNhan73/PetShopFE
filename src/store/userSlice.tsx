@@ -11,7 +11,8 @@ const initialState: User = {
   address: null,
   access_token: null,
   user_name: null,
-  role_id: null
+  role_id: null,
+  img_url: null
 }
 
 export const userSlice = createSlice({

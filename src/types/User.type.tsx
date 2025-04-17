@@ -4,6 +4,7 @@ export interface User {
     address: string | null,
     access_token: string | null,
     user_name: string | null,
-    role_id: string | null
+    role_id: string | null,
+    img_url: string | null
 }
 

@@ -75,6 +75,7 @@ export default function Login() {
                 const accesstoken = data.data?.accessToken;
                 if (accesstoken) {
                     const jwtinfo = decodeAcessToken(accesstoken);
+                    console.log(jwtinfo);
                     console.log('>>>>>>>>>>><>');
                     console.log(jwtinfo);
                     localService.saveData(keyname.isAuthenticated, 'true');
@@ -86,6 +87,7 @@ export default function Login() {
                             access_token: accesstoken,
                             user_name: jwtinfo.user_name,
                             role_id: jwtinfo.role_id,
+                            img_url: jwtinfo.img_url,
                         })
                     );
 
@@ -134,7 +136,7 @@ export default function Login() {
                 toast.error("There are some issue from the server");
                 return;
             }
-            if (+data.code === -1) {
+            if (+data.code === -4) {
                 toast.error("The email or password is incorrect");
                 return;
             }
@@ -154,6 +156,7 @@ export default function Login() {
                             access_token: accesstoken,
                             user_name: jwtinfo.user_name,
                             role_id: jwtinfo.role_id,
+                            img_url: jwtinfo.img_url,
                         })
                     );
 
