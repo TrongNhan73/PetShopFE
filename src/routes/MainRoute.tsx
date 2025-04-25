@@ -31,7 +31,6 @@ export default function MainRoute() {
   const isAuthenticated = localService.getData(keyname.isAuthenticated);
   const checkAuth = async () => {
     if (isAuthenticated) {
-      console.log(isAuthenticated);
       if (!accesstoken) {
         try {
           let res = await sendApiGetAccesstoken();

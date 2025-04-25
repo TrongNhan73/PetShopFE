@@ -1,11 +1,14 @@
 @use '../abstracts//variables';
 
 
-$icon-fill-color: blue;
-$icon-stroke-color: rgb(0, 0, 0);
+$icon-fill-color: transparent;
+$icon-fill-color-active: #543A14;
+
+$icon-stroke-color: #543A14;
 $icon-size: 50px;
 $color-header: white;
 $color-logout: red;
+$color-item-tab: #A86523;
 
 .container {
     display: flex;
@@ -14,71 +17,140 @@ $color-logout: red;
 
     .left-navigation {
         width: 250px;
-        background-color: aquamarine;
+        background-color: #FCEFCB;
         padding: 10px;
 
         div.title {
-
+            background-color: rgba(255, 255, 255, 0.379);
+            margin-bottom: 15px;
+            margin-top: 15px;
+            border-radius: 20px;
 
             img {
                 width: 100%;
+
             }
         }
 
         ul.navigation__items {
             font-size: 30px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
 
             li {
                 list-style: none;
                 font-size: inherit;
                 display: flex;
                 align-items: center;
+                cursor: pointer;
 
                 &:hover {
-                    background-color: rgb(226, 26, 192);
+                    background-color: #dcb89442;
+                    border-radius: 10px;
+
+                    svg {
+                        width: $icon-size + 10px;
+                        height: $icon-size + 10px;
+                    }
+
+                    a {
+
+                        transform: translateX(10px);
+                    }
                 }
 
                 a {
                     font-size: inherit;
+                    font-weight: inherit;
                     width: 100%;
-                    color: red;
+                    color: $color-item-tab;
                     text-decoration: none;
+                    transition: all 1s;
                 }
 
                 svg {
+                    flex-shrink: 0;
                     width: $icon-size;
                     height: $icon-size;
                     stroke: $icon-stroke-color;
                     fill: $icon-fill-color;
-                    stroke-width: 1 !important;
+                    box-sizing: border-box;
+                    stroke-width: 1;
+                    transition: all 1s;
                 }
 
 
                 &:has(> :global(.active)) {
-                    background-color: rgb(3, 13, 13);
+                    font-weight: 900;
+
+                    svg {
+                        width: $icon-size + 10px;
+                        height: $icon-size + 10px;
+                        fill: $icon-fill-color-active;
+                    }
+
+                    a {
+
+                        transform: translateX(10px);
+                    }
                 }
 
+                div.title__collapse {
+                    width: 100%;
+                    display: flex;
+                    font-size: inherit;
+                    align-items: center;
+
+                    .arrow {
+                        flex: 1;
+                        font-size: inherit;
+                        text-align: end;
+
+                        span {
+                            display: inline-block;
+                            transform: rotate(90deg);
+                            transition: all 1s;
+
+                        }
+                    }
+                }
 
             }
 
 
 
             li.collapse__container {
-                font-size: inherit;
-                color: blue;
+
+                color: $color-item-tab;
 
                 &:hover {
                     background-color: transparent;
                 }
 
                 flex-direction: column;
-                align-items: flex-start;
+                // align-items: flex-start;
 
                 .title {
                     display: flex;
                     align-items: center;
                     font-size: inherit;
                     color: inherit;
+                }
+
+                &:has(ul.collapse) {
+                    div.title__collapse {
+
+
+
+                        .arrow {
+
+
+                            span {
+                                transform: rotate(0deg);
+                            }
+                        }
+                    }
                 }
 
                 ul.collapse__items {
@@ -93,7 +165,13 @@ $color-logout: red;
                         transition: height 1s;
 
                         a {
-                            color: rgb(13, 255, 0);
+                            color: $color-item-tab;
+                        }
+
+                        &:hover {
+                            a {
+                                font-weight: 900;
+                            }
                         }
                     }
 
@@ -114,7 +192,7 @@ $color-logout: red;
         flex: 1;
         overflow: hidden;
 
-        background-color: bisque;
+        background-color: rgb(255, 255, 255);
 
         .header {
             background-color: $color-header;

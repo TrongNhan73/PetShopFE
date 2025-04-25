@@ -63,9 +63,10 @@ export default function Dashboard() {
                         <NavLink to={path.admin_product}>Product</NavLink>
                     </li>
                     <li className={style.collapse__container} onClick={() => setIsOrderCollapse(!isOrderCollapse)}>
-                        <div className={style.title}>
+                        <div className={style["title__collapse"]}>
                             <Icon_order />
                             Order
+                            <div className={style.arrow}><span>{'>'}</span></div>
                         </div>
                         <ul className={`${style.collapse__items} ${isOrderCollapse ? style.collapse : ''}`} onClick={(e) => e.stopPropagation()}>
                             <li>
